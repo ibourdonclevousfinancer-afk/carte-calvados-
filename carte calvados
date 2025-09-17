@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carte interactive du Calvados</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Carte Interactive des Villes Principales du Calvados</h2>
+<div id="map"></div>
+
+<script>
+    // Initialisation de la carte centrée sur le Calvados
+    var map = L.map('map').setView([49.1, -0.35], 9); // Coordonnées approximatives
+
+    // Ajout du fond de carte (OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Liste des villes avec coordonnées et texte
+    var villes = [
+        { nom: "Caen", lat: 49.1829, lon: -0.3707, texte: "Préfecture du Calvados, ville universitaire." },
+        { nom: "Bayeux", lat: 49.2742, lon: -0.7000, texte: "Connue pour sa célèbre tapisserie médiévale." },
+        { nom: "Lisieux", lat: 49.1460, lon: 0.2293, texte: "Centre religieux important avec la basilique Sainte-Thérèse." },
+        { nom: "Vire", lat: 48.8360, lon: -0.8893, texte: "Ville du bocage normand, connue pour l'andouille." },
+        { nom: "Falaise", lat: 48.8928, lon: -0.2008, texte: "Ville natale de Guillaume le Conquérant." },
+        { nom: "Honfleur", lat: 49.4194, lon: 0.2329, texte: "Charmante ville portuaire artistique." },
+        { nom: "Deauville", lat: 49.3570, lon: 0.0747, texte: "Station balnéaire chic, festivals de cinéma." },
+        { nom: "Trouville-sur-Mer", lat: 49.3666, lon: 0.0786, texte: "Ville voisine de Deauville, très animée." },
+        { nom: "Cabourg", lat: 49.2902, lon: -0.1184, texte: "Station balnéaire romantique." }
+    ];
+
+    // Ajout des marqueurs
+    villes.forEach(function(ville) {
+        L.marker([ville.lat, ville.lon])
+            .addTo(map)
+            .bindPopup("<b>" + ville.nom + "</b><br>" + ville.texte);
+    });
+</script>
+
+</body>
+</html>
